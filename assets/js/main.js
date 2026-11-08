@@ -37,12 +37,13 @@
     items.forEach(function(el){io.observe(el)});
   } else items.forEach(function(el){el.classList.add("in")});
 
+  var PH={"":"book a session (I'm not sure which service is right for me yet)","individual":"book an individual counselling session","couples":"book a couples counselling session",
+      "groups":"find out about your group therapy and support","corporate":"talk to you about corporate mental health and workplace wellness support",
+      "workshops":"enquire about a workshop, training or masterclass","programmes":"find out about your specialised healing programmes","speaking":"enquire about speaking or facilitation"};
+
   // booking form -> WhatsApp or email (no data is stored by this site)
   var f=d.getElementById("enquiry");
   if(f){
-    var PH={"":"book a session (I'm not sure which service is right for me yet)","individual":"book an individual counselling session","couples":"book a couples counselling session",
-      "groups":"find out about your group therapy and support","corporate":"talk to you about corporate mental health and workplace wellness support",
-      "workshops":"enquire about a workshop, training or masterclass","programmes":"find out about your specialised healing programmes","speaking":"enquire about speaking or facilitation"};
     function msg(){
       var v=function(n){var el=f.elements[n];return el?el.value.trim():""};
       var k=v("service"), lines=["Hello, I just checked your website. My name is "+v("name")+" and I'd like to "+(PH[k]||PH[""])+"."];
@@ -50,8 +51,6 @@
       if(v("note")) lines.push("What's bringing me here: "+v("note"));
       return lines.join("\n");
     }
-    // "Book" buttons on each service jump to the form with that service chosen
-    d.querySelectorAll("a[data-svc]").forEach(function(a){ a.addEventListener("click",function(){ f.elements.service.value=a.getAttribute("data-svc"); }); });
     function ok(){ if(!f.elements.name.value.trim()){ f.elements.name.focus(); f.reportValidity&&f.reportValidity(); return false;} return true; }
     d.getElementById("send-wa").addEventListener("click",function(){
       if(!ok()) return;
@@ -75,6 +74,35 @@
     });
   }
 
+
+
+  // service buttons: ask for a name, then open WhatsApp with a message written for that service
+  var waLinks=d.querySelectorAll("a[data-wa]");
+  if(waLinks.length){
+    var key="", box=d.createElement("div");
+    box.className="wa-pop"; box.hidden=true;
+    box.innerHTML='<div class="wa-pop-card" role="dialog" aria-modal="true" aria-labelledby="wa-t"><button type="button" class="wa-pop-x" aria-label="Close">&times;</button>'+
+      '<h3 id="wa-t">Nearly there</h3><p class="wa-pop-sub" id="wa-s"></p>'+
+      '<form id="wa-f"><label for="wa-n">Your name</label><input id="wa-n" autocomplete="name" placeholder="How should we address you?" required>'+
+      '<button class="btn" type="submit">Continue to WhatsApp <span class="arr" aria-hidden="true">→</span></button></form>'+
+      '<p class="wa-pop-skip"><a href="#" id="wa-skip">Skip and write my name in WhatsApp</a></p></div>';
+    d.body.appendChild(box);
+    var nm=box.querySelector("#wa-n"), sub=box.querySelector("#wa-s"), last=null;
+    function openPop(k,from){ key=PH.hasOwnProperty(k)?k:""; last=from; sub.textContent="We’ll open WhatsApp with a message already written for you: “"+PH[key]+"”."; box.hidden=false; d.body.classList.add("wa-open"); setTimeout(function(){nm.focus()},30); }
+    function closePop(){ box.hidden=true; d.body.classList.remove("wa-open"); if(last) last.focus(); }
+    function go(name){
+      var tail=(key===""||key==="individual"||key==="couples")?" Please could you let me know the available times and the next step?":" Please could you share more details and the next step?";
+      var m="Hello, I just checked your website. My name is "+(name||"______")+" and I'd like to "+PH[key]+"."+tail;
+      window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank","noopener");
+      closePop();
+    }
+    waLinks.forEach(function(a){ a.addEventListener("click",function(e){ e.preventDefault(); openPop(a.getAttribute("data-wa")||"",a); }); });
+    box.querySelector("#wa-f").addEventListener("submit",function(e){ e.preventDefault(); go(nm.value.trim()); });
+    box.querySelector("#wa-skip").addEventListener("click",function(e){ e.preventDefault(); go(""); });
+    box.querySelector(".wa-pop-x").addEventListener("click",closePop);
+    box.addEventListener("click",function(e){ if(e.target===box) closePop(); });
+    d.addEventListener("keydown",function(e){ if(e.key==="Escape"&&!box.hidden) closePop(); });
+  }
 
   // resources sign-up (opens an email to the centre until a mailing list is connected)
   var s=d.getElementById("signup");

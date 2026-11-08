@@ -338,3 +338,18 @@ section{position:relative}
 .mail-help[hidden]{display:none}
 .mail-help p{margin:0 0 .8rem}
 .mail-help .fine{margin:.8rem 0 0;font-size:.88rem;color:var(--ink-soft)}
+
+/* WhatsApp name pop-up (service buttons on the Services page) */
+.wa-pop{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;padding:1.2rem;background:rgba(59,35,33,.55)}
+.wa-pop[hidden]{display:none}
+.wa-pop-card{position:relative;width:min(440px,100%);background:var(--cream);border-radius:24px;padding:2rem 1.8rem 1.6rem;box-shadow:0 30px 70px rgba(59,35,33,.35)}
+.wa-pop-card h3{margin:0 0 .5rem;font-size:1.5rem;color:var(--rose-deep)}
+.wa-pop-sub{margin:0 0 1.2rem;color:var(--ink-soft);font-size:.98rem;line-height:1.55}
+.wa-pop-card label{display:block;font-family:var(--sans);font-size:.88rem;letter-spacing:.06em;margin-bottom:.4rem;color:var(--ink-soft)}
+.wa-pop-card input{width:100%;font:inherit;font-size:1rem;padding:.9em 1.1em;border-radius:14px;border:1.5px solid var(--line);background:#fff;color:var(--ink);margin-bottom:1rem}
+.wa-pop-card input:focus{outline:none;border-color:var(--rose);box-shadow:0 0 0 4px rgba(200,124,120,.2)}
+.wa-pop-card .btn{width:100%;justify-content:center}
+.wa-pop-x{position:absolute;top:.6rem;right:.9rem;border:0;background:none;font-size:1.8rem;line-height:1;color:var(--ink-soft);cursor:pointer}
+.wa-pop-skip{margin:1rem 0 0;text-align:center;font-size:.85rem}
+.wa-pop-skip a{color:var(--ink-soft);text-decoration:underline}
+body.wa-open{overflow:hidden}
