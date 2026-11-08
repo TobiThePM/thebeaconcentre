@@ -9,7 +9,18 @@ os.makedirs(os.path.join(OUT, "assets/js"), exist_ok=True)
 shutil.copy(os.path.join(SRC, "style.css"), os.path.join(OUT, "assets/css/style.css"))
 shutil.copy(os.path.join(SRC, "main.js"), os.path.join(OUT, "assets/js/main.js"))
 
-WA = "https://wa.me/2348181057549?text=Hello%2C%20I%27d%20like%20to%20book%20a%20session."
+from urllib.parse import quote
+WA_NUM = "2348181057549"
+WA_PHRASE = {"": "book a session", "individual": "book an individual counselling session",
+    "couples": "book a couples counselling session", "groups": "find out about your group therapy and support",
+    "corporate": "talk to you about corporate mental health and workplace wellness support",
+    "workshops": "enquire about a workshop, training or masterclass",
+    "programmes": "find out about your specialised healing programmes", "speaking": "enquire about speaking or facilitation"}
+def wa(key=""):
+    """No-JavaScript fallback link: the same message with a blank for the name."""
+    msg = f"Hello, I just checked your website. My name is ______ and I'd like to {WA_PHRASE[key]}."
+    return f"https://wa.me/{WA_NUM}?text={quote(msg)}"
+WA = wa("")
 EMAIL = "beaconwellnesscentre@gmail.com"
 IG = "https://www.instagram.com/thebeaconcentre.co"
 ARROW = '<span class="arr" aria-hidden="true">→</span>'
@@ -54,7 +65,7 @@ def head(title, desc, page):
 
 def foot():
     return f"""</main>
-<div class="quick"><a class="btn" href="{WA}" target="_blank" rel="noopener">Book on WhatsApp {ARROW}</a></div>
+<div class="quick"><a class="btn" href="{WA}" data-wa="" target="_blank" rel="noopener">Book on WhatsApp {ARROW}</a></div>
 <footer class="site-foot">
   <div class="wrap">
     <div class="foot-grid">
@@ -66,7 +77,7 @@ def foot():
         <li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li>
         <li><a href="resources.html">Resources</a></li><li><a href="book.html">Book a session</a></li></ul></div>
       <div><h5>Talk to us</h5><ul>
-        <li><a href="{WA}" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="{WA}" data-wa="" target="_blank" rel="noopener">WhatsApp</a></li>
         <li><a href="tel:+2348181057549">0818 105 7549</a></li>
         <li><a href="mailto:{EMAIL}">{EMAIL}</a></li></ul></div>
       <div><h5>Hours</h5><ul>
@@ -104,7 +115,7 @@ MOS = mosaic(("michelle-listening.jpg", "Michelle seated at a café table, looki
              ("michelle-writing.jpg", "Michelle leaning in over a table, writing", "Unhurried, practical, yours"),
              ("michelle-speaking.jpg", "Michelle speaking at an event with a microphone", "Honest conversations"))
 
-SPIN = f'<a class="spin" href="{WA}" target="_blank" rel="noopener" aria-label="Book a session on WhatsApp"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circ" d="M60 60m-47 0a47 47 0 1 1 94 0a47 47 0 1 1-94 0"/></defs><text><textPath href="#circ" textLength="292" lengthAdjust="spacing">Book a session · Healing · Clarity · Wholeness ·</textPath></text></svg><span class="arw">→</span></a>'
+SPIN = f'<a class="spin" href="{WA}" data-wa="" target="_blank" rel="noopener" aria-label="Book a session on WhatsApp"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circ" d="M60 60m-47 0a47 47 0 1 1 94 0a47 47 0 1 1-94 0"/></defs><text><textPath href="#circ" textLength="292" lengthAdjust="spacing">Book a session · Healing · Clarity · Wholeness ·</textPath></text></svg><span class="arw">→</span></a>'
 
 RING = '<svg viewBox="0 0 220 90" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M14 48C6 16 92 4 132 6c60 2 84 26 76 48-8 26-86 32-136 28C26 78 4 62 18 38"/></svg>'
 
@@ -188,7 +199,7 @@ home += f"""
       <h1 class="rv d1">You don’t have to be falling apart to <span class="ring">need therapy.{RING}</span></h1>
       <p class="lede rv d2">Overwhelmed, stuck, grieving, or tired of repeating the same patterns? Talk it through with a trained CBT therapist, in a space that’s private, unhurried and entirely yours.</p>
       <div class="cta-row rv d3">
-        <a class="btn" href="{WA}" target="_blank" rel="noopener">Book a session {ARROW}</a>
+        <a class="btn" href="{WA}" data-wa="" target="_blank" rel="noopener">Book a session {ARROW}</a>
         <a class="btn ghost" href="#how">How it works</a>
       </div>
       <div class="trust rv d3">
@@ -318,7 +329,7 @@ home += f"""
     <span class="eyebrow rv">Ready when you are</span>
     <h2 class="rv">Healing starts with one message.</h2>
     <p class="lede rv">Tell us a little about what’s going on. We’ll reply during working hours (9am – 6pm) and guide you through the next step.</p>
-    <div class="cta-row rv"><a class="btn" href="{WA}" target="_blank" rel="noopener">Book on WhatsApp {ARROW}</a><a class="btn ghost" href="book.html">Other ways to reach us</a></div>
+    <div class="cta-row rv"><a class="btn" href="{WA}" data-wa="" target="_blank" rel="noopener">Book on WhatsApp {ARROW}</a><a class="btn ghost" href="book.html">Other ways to reach us</a></div>
   </div>
 </section>
 """ + foot()
@@ -344,7 +355,7 @@ about += f"""
       <p class="rv" style="margin-top:1rem">Her work spans children, teenagers and adults, walking with them through seasons of transition, healing and self-discovery. She is also the founder of <a href="https://creatorshavenglobal.com" target="_blank" rel="noopener"><u>Creators Haven Global</u></a>.</p>
       <p class="rv" style="margin-top:1rem">In session, you can expect a safe, respectful and non-judgemental space where you can be honest, feel heard, and take the steps toward healing and growth at your own pace.</p>
       <div class="creds rv"><span>Professional counsellor, ADI</span><span>CBT-trained therapist</span></div>
-      <p class="rv" style="margin-top:1.8rem"><a class="btn" href="{WA}" target="_blank" rel="noopener">Book a session with Michelle {ARROW}</a></p>
+      <p class="rv" style="margin-top:1.8rem"><a class="btn" href="{WA}" data-wa="" target="_blank" rel="noopener">Book a session with Michelle {ARROW}</a></p>
     </div>
   </div>
 </section>
@@ -388,7 +399,7 @@ about += f"""
 <section class="band"><div class="wrap">
   <span class="eyebrow rv">Start gently</span>
   <h2 class="rv">If you’re wondering whether this is for you, it probably is.</h2>
-  <div class="cta-row rv"><a class="btn" href="{WA}" target="_blank" rel="noopener">Message us on WhatsApp {ARROW}</a><a class="btn ghost" href="services.html">See our services</a></div>
+  <div class="cta-row rv"><a class="btn" href="{WA}" data-wa="" target="_blank" rel="noopener">Message us on WhatsApp {ARROW}</a><a class="btn ghost" href="services.html">See our services</a></div>
 </div></section>
 """ + foot()
 pages["about.html"] = about
@@ -420,7 +431,7 @@ for i, (name, anchor, short, topics, who, how) in enumerate(SERVICES, 1):
     {topics_html}
     <h4>How it works</h4><p>{how}</p>
     {price}
-    <div class="cta-row"><a class="btn" href="{WA}" target="_blank" rel="noopener">{'Book a session' if anchor in ('individual','couples') else 'Make an enquiry'} {ARROW}</a></div>
+    <div class="cta-row"><a class="btn" href="{wa(anchor)}" data-wa="{anchor}" target="_blank" rel="noopener">{'Book a session' if anchor in ('individual','couples') else 'Make an enquiry'} {ARROW}</a></div>
   </div>
 </article>
 """
@@ -483,7 +494,7 @@ bk += f"""
       <span class="eyebrow">Quickest</span>
       <h2>Message us on WhatsApp</h2>
       <p>Say hello and tell us roughly what you’d like help with. We’ll reply during working hours and suggest a time.</p>
-      <a class="btn light" href="{WA}" target="_blank" rel="noopener">Open WhatsApp {ARROW}</a>
+      <a class="btn light" href="{WA}" data-wa="" target="_blank" rel="noopener">Open WhatsApp {ARROW}</a>
     </div>
     <dl class="info rv">
       <div><dt>WhatsApp</dt><dd><a href="{WA}" target="_blank" rel="noopener">0818 105 7549</a></dd></div>
