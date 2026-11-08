@@ -305,11 +305,11 @@ home += f"""
         <div class="row"><span>8 sessions</span><b>₦450,000</b></div>
         <div class="row"><span>10 sessions</span><b>₦550,000</b></div></div>
       <div class="card rv d1"><h3>Couples</h3><p class="sub">Premarital and marital counselling</p>
-        <div class="row"><span>6 sessions · Essential</span><b>₦450,000</b></div>
+        <div class="row"><span>6 sessions · Essential</span><b>₦450,000</b><a class="pick" href="{wa("couples")}" data-wa="couples" data-pkg="the 6-session Essential package" data-price="₦450,000" target="_blank" rel="noopener">Choose</a></div>
         <p class="note">For couples who want to address the major foundations of marriage.</p>
-        <div class="row"><span>8 sessions · Comprehensive</span><b>₦550,000</b></div>
+        <div class="row"><span>8 sessions · Comprehensive</span><b>₦550,000</b><a class="pick" href="{wa("couples")}" data-wa="couples" data-pkg="the 8-session Comprehensive package" data-price="₦550,000" target="_blank" rel="noopener">Choose</a></div>
         <p class="note">For deeper conversations and practical preparation.</p>
-        <div class="row"><span>10 sessions · Intensive</span><b>₦650,000</b></div>
+        <div class="row"><span>10 sessions · Intensive</span><b>₦650,000</b><a class="pick" href="{wa("couples")}" data-wa="couples" data-pkg="the 10-session Intensive package" data-price="₦650,000" target="_blank" rel="noopener">Choose</a></div>
         <p class="note">For more thorough assessment, significant areas of disagreement, or extra support.</p></div>
     </div>
     <p class="fine rv">Group therapy, corporate programmes, workshops and speaking are quoted on request.</p>
@@ -435,9 +435,9 @@ sv += f"""
 for i, (name, anchor, short, topics, who, how) in enumerate(SERVICES, 1):
     price = ""
     if anchor == "individual":
-        price = '<h4>Fees</h4><div class="row"><span>60-minute session</span><b>₦75,000</b></div><div class="row"><span>4 sessions</span><b>₦250,000</b></div><div class="row"><span>6 sessions</span><b>₦350,000</b></div><div class="row"><span>8 sessions</span><b>₦450,000</b></div><div class="row"><span>10 sessions</span><b>₦550,000</b></div>'
+        price = '<h4>Fees</h4><div class="row"><span>60-minute session</span><b>₦75,000</b><a class="pick" href="{wa("individual")}" data-wa="individual" data-pkg="a single 60-minute session" data-price="₦75,000" target="_blank" rel="noopener">Choose</a></div><div class="row"><span>4 sessions</span><b>₦250,000</b><a class="pick" href="{wa("individual")}" data-wa="individual" data-pkg="the 4-session package" data-price="₦250,000" target="_blank" rel="noopener">Choose</a></div><div class="row"><span>6 sessions</span><b>₦350,000</b><a class="pick" href="{wa("individual")}" data-wa="individual" data-pkg="the 6-session package" data-price="₦350,000" target="_blank" rel="noopener">Choose</a></div><div class="row"><span>8 sessions</span><b>₦450,000</b><a class="pick" href="{wa("individual")}" data-wa="individual" data-pkg="the 8-session package" data-price="₦450,000" target="_blank" rel="noopener">Choose</a></div><div class="row"><span>10 sessions</span><b>₦550,000</b><a class="pick" href="{wa("individual")}" data-wa="individual" data-pkg="the 10-session package" data-price="₦550,000" target="_blank" rel="noopener">Choose</a></div>'
     elif anchor == "couples":
-        price = '<h4>Fees</h4><div class="row"><span>6 sessions · Essential</span><b>₦450,000</b></div><p class="note">For couples who want to address the major foundations of marriage.</p><div class="row"><span>8 sessions · Comprehensive</span><b>₦550,000</b></div><p class="note">For deeper conversations and practical preparation.</p><div class="row"><span>10 sessions · Intensive</span><b>₦650,000</b></div><p class="note">For more thorough assessment, significant areas of disagreement, or extra support.</p>'
+        price = '<h4>Fees</h4><div class="row"><span>6 sessions · Essential</span><b>₦450,000</b><a class="pick" href="{wa("couples")}" data-wa="couples" data-pkg="the 6-session Essential package" data-price="₦450,000" target="_blank" rel="noopener">Choose</a></div><p class="note">For couples who want to address the major foundations of marriage.</p><div class="row"><span>8 sessions · Comprehensive</span><b>₦550,000</b><a class="pick" href="{wa("couples")}" data-wa="couples" data-pkg="the 8-session Comprehensive package" data-price="₦550,000" target="_blank" rel="noopener">Choose</a></div><p class="note">For deeper conversations and practical preparation.</p><div class="row"><span>10 sessions · Intensive</span><b>₦650,000</b><a class="pick" href="{wa("couples")}" data-wa="couples" data-pkg="the 10-session Intensive package" data-price="₦650,000" target="_blank" rel="noopener">Choose</a></div><p class="note">For more thorough assessment, significant areas of disagreement, or extra support.</p>'
     else:
         price = '<h4>Fees</h4><p class="muted">Quoted on request.</p>'
     topics_html = ("<h4>What it can help with</h4><ul>" + "".join(f"<li>{t}</li>" for t in topics) + "</ul>") if topics else ""
@@ -448,7 +448,7 @@ for i, (name, anchor, short, topics, who, how) in enumerate(SERVICES, 1):
     {topics_html}
     <h4>How it works</h4><p>{how}</p>
     {price}
-    <div class="cta-row"><a class="btn" href="{wa(anchor)}" data-wa="{anchor}" target="_blank" rel="noopener">{'Book a session' if anchor in ('individual','couples') else 'Make an enquiry'} {ARROW}</a></div>
+    {'' if anchor in ('individual','couples') else '<div class="cta-row"><a class="btn" href="' + wa(anchor) + '" data-wa="' + anchor + '" target="_blank" rel="noopener">Make an enquiry ' + ARROW + '</a></div>'}
   </div>
 </article>
 """

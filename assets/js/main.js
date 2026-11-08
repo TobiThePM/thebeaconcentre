@@ -82,17 +82,30 @@
     var key="", box=d.createElement("div");
     box.className="wa-pop"; box.hidden=true;
     box.innerHTML='<div class="wa-pop-card" role="dialog" aria-modal="true" aria-labelledby="wa-t"><button type="button" class="wa-pop-x" aria-label="Close">&times;</button>'+
-      '<h3 id="wa-t">Nearly there</h3><p class="wa-pop-sub" id="wa-s"></p>'+
+      '<h3 id="wa-t">Nearly there</h3><p class="wa-pop-pick" id="wa-p" hidden></p><p class="wa-pop-sub" id="wa-s"></p>'+
       '<form id="wa-f"><label for="wa-n">Your name</label><input id="wa-n" autocomplete="name" placeholder="How should we address you?" required>'+
+      '<label for="wa-w">When suits you best? (optional)</label><input id="wa-w" placeholder="e.g. weekday evenings">'+
       '<button class="btn" type="submit">Continue to WhatsApp <span class="arr" aria-hidden="true">→</span></button></form>'+
       '<p class="wa-pop-skip"><a href="#" id="wa-skip">Skip and write my name in WhatsApp</a></p></div>';
     d.body.appendChild(box);
     var nm=box.querySelector("#wa-n"), sub=box.querySelector("#wa-s"), last=null;
-    function openPop(k,from){ key=PH.hasOwnProperty(k)?k:""; last=from; sub.textContent="We’ll open WhatsApp with a message already written for you: “"+PH[key]+"”."; box.hidden=false; d.body.classList.add("wa-open"); setTimeout(function(){nm.focus()},30); }
+    var pkg="", price="", pk=box.querySelector("#wa-p"), when=box.querySelector("#wa-w");
+    function openPop(k,from){
+      nm.value=""; when.value=""; key=PH.hasOwnProperty(k)?k:""; last=from; pkg=from.getAttribute("data-pkg")||""; price=from.getAttribute("data-price")||"";
+      if(pkg){ pk.textContent="Your choice: "+(from.parentNode.querySelector("span")||{}).textContent+" · "+price; pk.hidden=false; sub.textContent="We’ll open WhatsApp with your choice and your name already written, so we can reply with times and next steps."; }
+      else { pk.hidden=true; sub.textContent="We’ll open WhatsApp with a message already written for you: “"+PH[key]+"”."; }
+      box.hidden=false; d.body.classList.add("wa-open"); setTimeout(function(){nm.focus()},30);
+    }
     function closePop(){ box.hidden=true; d.body.classList.remove("wa-open"); if(last) last.focus(); }
+    var FOR={"individual":"individual counselling","couples":"couples counselling"};
     function go(name){
-      var tail=(key===""||key==="individual"||key==="couples")?" Please could you let me know the available times and the next step?":" Please could you share more details and the next step?";
-      var m="Hello, I just checked your website. My name is "+(name||"______")+" and I'd like to "+PH[key]+"."+tail;
+      var who=name||"______", w=when.value.trim(), m;
+      if(pkg){
+        m="Hello, I just checked your website. My name is "+who+" and I'd like to book "+pkg+" for "+FOR[key]+" ("+price+")."+(w?" Best times for me: "+w+".":"")+" Please could you let me know the available times and how to confirm my slot?";
+      } else {
+        var tail=(key===""||key==="individual"||key==="couples")?" Please could you let me know the available times and the next step?":" Please could you share more details and the next step?";
+        m="Hello, I just checked your website. My name is "+who+" and I'd like to "+PH[key]+"."+(w?" Best times for me: "+w+".":"")+tail;
+      }
       window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(m),"_blank","noopener");
       closePop();
     }

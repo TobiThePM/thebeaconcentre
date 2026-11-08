@@ -353,3 +353,9 @@ section{position:relative}
 .wa-pop-skip{margin:1rem 0 0;text-align:center;font-size:.85rem}
 .wa-pop-skip a{color:var(--ink-soft);text-decoration:underline}
 body.wa-open{overflow:hidden}
+
+/* package "Choose" buttons in the fee lists */
+.row .pick{order:4;align-self:center;margin-left:.4rem;padding:.28rem .95rem;border-radius:999px;border:1.5px solid var(--rose);color:var(--rose-deep);font-family:var(--sans);font-size:.84rem;letter-spacing:.04em;text-decoration:none;white-space:nowrap;transition:background .2s,color .2s}
+.row .pick:hover,.row .pick:focus-visible{background:var(--rose-deep);border-color:var(--rose-deep);color:#fff}
+.wa-pop-pick{margin:0 0 1rem;padding:.7rem 1rem;border-radius:14px;background:var(--blush);color:var(--rose-deep);font-family:var(--sans);font-size:.95rem}
+.wa-pop-pick[hidden]{display:none}
