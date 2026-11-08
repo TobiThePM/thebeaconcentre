@@ -56,7 +56,7 @@ def head(title, desc, page):
     <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
       {''.join(f'<a href="{h}"' + (' aria-current="page"' if h == page else '') + f'>{t}</a>' for h, t in NAV)}
-      <a class="btn sm" href="book.html">Book a session {ARROW}</a>
+      <a class="btn sm" href="services.html#book">Book a session {ARROW}</a>
     </nav>
   </div>
 </header>
@@ -65,7 +65,7 @@ def head(title, desc, page):
 
 def foot():
     return f"""</main>
-<div class="quick"><a class="btn" href="{WA}" data-wa="" target="_blank" rel="noopener">Book on WhatsApp {ARROW}</a></div>
+<div class="quick"><a class="btn" href="services.html#book">Book a session {ARROW}</a></div>
 <footer class="site-foot">
   <div class="wrap">
     <div class="foot-grid">
@@ -75,9 +75,9 @@ def foot():
       </div>
       <div><h5>Explore</h5><ul>
         <li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li>
-        <li><a href="resources.html">Resources</a></li><li><a href="book.html">Book a session</a></li></ul></div>
+        <li><a href="resources.html">Resources</a></li><li><a href="services.html#book">Book a session</a></li><li><a href="book.html">Contact</a></li></ul></div>
       <div><h5>Talk to us</h5><ul>
-        <li><a href="{WA}" data-wa="" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="{WA}" target="_blank" rel="noopener">WhatsApp</a></li>
         <li><a href="tel:+2348181057549">0818 105 7549</a></li>
         <li><a href="mailto:{EMAIL}">{EMAIL}</a></li></ul></div>
       <div><h5>Hours</h5><ul>
@@ -115,7 +115,7 @@ MOS = mosaic(("michelle-listening.jpg", "Michelle seated at a café table, looki
              ("michelle-writing.jpg", "Michelle leaning in over a table, writing", "Unhurried, practical, yours"),
              ("michelle-speaking.jpg", "Michelle speaking at an event with a microphone", "Honest conversations"))
 
-SPIN = f'<a class="spin" href="{WA}" data-wa="" target="_blank" rel="noopener" aria-label="Book a session on WhatsApp"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circ" d="M60 60m-47 0a47 47 0 1 1 94 0a47 47 0 1 1-94 0"/></defs><text><textPath href="#circ" textLength="292" lengthAdjust="spacing">Book a session · Healing · Clarity · Wholeness ·</textPath></text></svg><span class="arw">→</span></a>'
+SPIN = f'<a class="spin" href="{WA}" target="_blank" rel="noopener" aria-label="Book a session on WhatsApp"><svg viewBox="0 0 120 120" aria-hidden="true"><defs><path id="circ" d="M60 60m-47 0a47 47 0 1 1 94 0a47 47 0 1 1-94 0"/></defs><text><textPath href="#circ" textLength="292" lengthAdjust="spacing">Book a session · Healing · Clarity · Wholeness ·</textPath></text></svg><span class="arw">→</span></a>'
 
 RING = '<svg viewBox="0 0 220 90" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M14 48C6 16 92 4 132 6c60 2 84 26 76 48-8 26-86 32-136 28C26 78 4 62 18 38"/></svg>'
 
@@ -199,7 +199,7 @@ home += f"""
       <h1 class="rv d1">You don’t have to be falling apart to <span class="ring">need therapy.{RING}</span></h1>
       <p class="lede rv d2">Overwhelmed, stuck, grieving, or tired of repeating the same patterns? Talk it through with a trained CBT therapist, in a space that’s private, unhurried and entirely yours.</p>
       <div class="cta-row rv d3">
-        <a class="btn" href="{WA}" data-wa="" target="_blank" rel="noopener">Book a session {ARROW}</a>
+        <a class="btn" href="services.html#book">Book a session {ARROW}</a>
         <a class="btn ghost" href="#how">How it works</a>
       </div>
       <div class="trust rv d3">
@@ -329,7 +329,7 @@ home += f"""
     <span class="eyebrow rv">Ready when you are</span>
     <h2 class="rv">Healing starts with one message.</h2>
     <p class="lede rv">Tell us a little about what’s going on. We’ll reply during working hours (9am – 6pm) and guide you through the next step.</p>
-    <div class="cta-row rv"><a class="btn" href="{WA}" data-wa="" target="_blank" rel="noopener">Book on WhatsApp {ARROW}</a><a class="btn ghost" href="book.html">Other ways to reach us</a></div>
+    <div class="cta-row rv"><a class="btn" href="services.html#book">Book a session {ARROW}</a><a class="btn ghost" href="book.html">Other ways to reach us</a></div>
   </div>
 </section>
 """ + foot()
@@ -355,7 +355,7 @@ about += f"""
       <p class="rv" style="margin-top:1rem">Her work spans children, teenagers and adults, walking with them through seasons of transition, healing and self-discovery. She is also the founder of <a href="https://creatorshavenglobal.com" target="_blank" rel="noopener"><u>Creators Haven Global</u></a>.</p>
       <p class="rv" style="margin-top:1rem">In session, you can expect a safe, respectful and non-judgemental space where you can be honest, feel heard, and take the steps toward healing and growth at your own pace.</p>
       <div class="creds rv"><span>Professional counsellor, ADI</span><span>CBT-trained therapist</span></div>
-      <p class="rv" style="margin-top:1.8rem"><a class="btn" href="{WA}" data-wa="" target="_blank" rel="noopener">Book a session with Michelle {ARROW}</a></p>
+      <p class="rv" style="margin-top:1.8rem"><a class="btn" href="services.html#book">Book a session with Michelle {ARROW}</a></p>
     </div>
   </div>
 </section>
@@ -399,10 +399,27 @@ about += f"""
 <section class="band"><div class="wrap">
   <span class="eyebrow rv">Start gently</span>
   <h2 class="rv">If you’re wondering whether this is for you, it probably is.</h2>
-  <div class="cta-row rv"><a class="btn" href="{WA}" data-wa="" target="_blank" rel="noopener">Message us on WhatsApp {ARROW}</a><a class="btn ghost" href="services.html">See our services</a></div>
+  <div class="cta-row rv"><a class="btn" href="{WA}" target="_blank" rel="noopener">Message us on WhatsApp {ARROW}</a><a class="btn ghost" href="services.html">See our services</a></div>
 </div></section>
 """ + foot()
 pages["about.html"] = about
+
+ENQ_FORM = f"""<form class="form" id="enquiry" onsubmit="return false">
+      <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required autocomplete="name"></div>
+      <div class="field"><label for="f-email">Email (only needed if you’re sending by email)</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+      <div class="field"><label for="f-service">Which service would you like?</label>
+        <select id="f-service" name="service"><option value="">Not sure yet</option>
+          <option value="individual">Individual therapy &amp; counselling</option><option value="couples">Couples &amp; relationship counselling</option><option value="groups">Group therapy &amp; support</option>
+          <option value="corporate">Corporate mental health &amp; workplace wellness</option><option value="workshops">Workshops, training &amp; masterclasses</option><option value="programmes">Specialised healing programmes</option><option value="speaking">Speaking &amp; facilitation</option></select></div>
+      <div class="field"><label for="f-when">When suits you best?</label><input id="f-when" name="when" placeholder="e.g. weekday evenings"></div>
+      <div class="field"><label for="f-note">Anything you’d like us to know? (optional)</label><textarea id="f-note" name="note"></textarea></div>
+      <div class="cta-row"><button class="btn" type="button" id="send-wa">Send by WhatsApp {ARROW}</button><button class="btn ghost" type="button" id="send-mail">Send by email</button></div>
+      <div class="mail-help" id="mail-help" hidden>
+        <p><b>Your email message is ready.</b> Choose how to send it to <u>{EMAIL}</u>:</p>
+        <div class="cta-row"><a class="btn" id="m-gmail" href="#" target="_blank" rel="noopener">Open in Gmail {ARROW}</a><a class="btn ghost" id="m-app" href="#">Open my email app</a><button class="btn ghost" type="button" id="m-copy">Copy message</button></div>
+        <p class="fine" id="m-note"></p>
+      </div>
+    </form>"""
 
 # ---------------- SERVICES ----------------
 sv = head("Services | The Beacon Centre", "Individual and couples counselling, group support, corporate wellness, workshops, specialised programmes and speaking.", "services.html")
@@ -411,6 +428,7 @@ sv += f"""
   <span class="eyebrow rv">Services</span>
   <h1 class="rv d1">Find the right kind of support.</h1>
   <p class="lede rv d2">Not sure where you fit? Start with one-to-one counselling or message us. We’ll help you work out the right place to begin.</p>
+  <p class="rv d3" style="margin-top:1.6rem"><a class="btn" href="#book">Book a session {ARROW}</a></p>
 </div></section>
 <section class="sec" style="padding-top:0"><div class="wrap">{MOS}</div></section>
 <section class="sec" style="padding-top:1rem"><div class="wrap">
@@ -431,15 +449,20 @@ for i, (name, anchor, short, topics, who, how) in enumerate(SERVICES, 1):
     {topics_html}
     <h4>How it works</h4><p>{how}</p>
     {price}
-    <div class="cta-row"><a class="btn" href="{wa(anchor)}" data-wa="{anchor}" target="_blank" rel="noopener">{'Book a session' if anchor in ('individual','couples') else 'Make an enquiry'} {ARROW}</a></div>
+    <div class="cta-row"><a class="btn" href="#book" data-svc="{anchor}">{'Book a session' if anchor in ('individual','couples') else 'Make an enquiry'} {ARROW}</a></div>
   </div>
 </article>
 """
-sv += """</div></section>
-<section class="band"><div class="wrap">
-  <span class="eyebrow rv">Not sure which?</span>
-  <h2 class="rv">Tell us what’s going on and we’ll point you the right way.</h2>
-  <div class="cta-row rv"><a class="btn" href="book.html">Make an enquiry """ + ARROW + """</a></div>
+sv += f"""</div></section>
+<section class="sec blush" id="book"><div class="wrap split" style="align-items:start">
+  <div><span class="eyebrow rv">Book a session</span><h2 class="rv" style="margin:1rem 0">Choose what you need, and tell us a little.</h2>
+    <p class="lede rv">Pick the service, add your name, and send it to us by WhatsApp. Michelle will see exactly what you’re asking for, and reply in working hours with a time. Not sure which service fits? Leave it on “Not sure yet” and we’ll point you the right way.</p>
+    <p class="fine rv">Prefer to talk first? <a href="{WA}" target="_blank" rel="noopener"><u>Message us on WhatsApp</u></a>.</p></div>
+  <div class="card rv d1">
+    <h3>Your details</h3>
+    <p class="sub">Nothing is stored on this website. It goes to us by WhatsApp or email, as you choose.</p>
+    {ENQ_FORM}
+  </div>
 </div></section>
 """ + foot()
 pages["services.html"] = sv
@@ -494,7 +517,7 @@ bk += f"""
       <span class="eyebrow">Quickest</span>
       <h2>Message us on WhatsApp</h2>
       <p>Say hello and tell us roughly what you’d like help with. We’ll reply during working hours and suggest a time.</p>
-      <a class="btn light" href="{WA}" data-wa="" target="_blank" rel="noopener">Open WhatsApp {ARROW}</a>
+      <a class="btn light" href="{WA}" target="_blank" rel="noopener">Open WhatsApp {ARROW}</a>
     </div>
     <dl class="info rv">
       <div><dt>WhatsApp</dt><dd><a href="{WA}" target="_blank" rel="noopener">0818 105 7549</a></dd></div>
@@ -508,22 +531,7 @@ bk += f"""
   <div class="card rv d1">
     <h3>Prefer to write it down?</h3>
     <p class="sub">Share a little. You choose whether it goes to us by WhatsApp or email. Nothing is stored on this website.</p>
-    <form class="form" id="enquiry" onsubmit="return false">
-      <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required autocomplete="name"></div>
-      <div class="field"><label for="f-email">Email (only needed if you’re sending by email)</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
-      <div class="field"><label for="f-service">What are you interested in?</label>
-        <select id="f-service" name="service"><option value="">Not sure yet</option>
-          <option>Individual counselling</option><option>Couples counselling</option><option>Group therapy</option>
-          <option>Corporate wellness</option><option>Workshop or training</option><option>Specialised healing programme</option><option>Speaking or facilitation</option></select></div>
-      <div class="field"><label for="f-when">When suits you best?</label><input id="f-when" name="when" placeholder="e.g. weekday evenings"></div>
-      <div class="field"><label for="f-note">Anything you’d like us to know? (optional)</label><textarea id="f-note" name="note"></textarea></div>
-      <div class="cta-row"><button class="btn" type="button" id="send-wa">Send by WhatsApp {ARROW}</button><button class="btn ghost" type="button" id="send-mail">Send by email</button></div>
-      <div class="mail-help" id="mail-help" hidden>
-        <p><b>Your email message is ready.</b> Choose how to send it to <u>{EMAIL}</u>:</p>
-        <div class="cta-row"><a class="btn" id="m-gmail" href="#" target="_blank" rel="noopener">Open in Gmail {ARROW}</a><a class="btn ghost" id="m-app" href="#">Open my email app</a><button class="btn ghost" type="button" id="m-copy">Copy message</button></div>
-        <p class="fine" id="m-note"></p>
-      </div>
-    </form>
+    {ENQ_FORM}
   </div>
 </div></section>
 

@@ -25,7 +25,7 @@
     <button class="menu-btn" aria-expanded="false" aria-controls="nav">Menu</button>
     <nav class="nav" id="nav" aria-label="Main">
       <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a><a href="resources.html">Resources</a>
-      <a class="btn sm" href="book.html">Book a session <span class="arr" aria-hidden="true">→</span></a>
+      <a class="btn sm" href="services.html#book">Book a session <span class="arr" aria-hidden="true">→</span></a>
     </nav>
   </div>
 </header>
@@ -43,7 +43,7 @@
       <span class="eyebrow">Quickest</span>
       <h2>Message us on WhatsApp</h2>
       <p>Say hello and tell us roughly what you’d like help with. We’ll reply during working hours and suggest a time.</p>
-      <a class="btn light" href="https://wa.me/2348181057549?text=Hello%2C%20I%20just%20checked%20your%20website.%20My%20name%20is%20______%20and%20I%27d%20like%20to%20book%20a%20session." data-wa="" target="_blank" rel="noopener">Open WhatsApp <span class="arr" aria-hidden="true">→</span></a>
+      <a class="btn light" href="https://wa.me/2348181057549?text=Hello%2C%20I%20just%20checked%20your%20website.%20My%20name%20is%20______%20and%20I%27d%20like%20to%20book%20a%20session." target="_blank" rel="noopener">Open WhatsApp <span class="arr" aria-hidden="true">→</span></a>
     </div>
     <dl class="info rv">
       <div><dt>WhatsApp</dt><dd><a href="https://wa.me/2348181057549?text=Hello%2C%20I%20just%20checked%20your%20website.%20My%20name%20is%20______%20and%20I%27d%20like%20to%20book%20a%20session." target="_blank" rel="noopener">0818 105 7549</a></dd></div>
@@ -60,10 +60,10 @@
     <form class="form" id="enquiry" onsubmit="return false">
       <div class="field"><label for="f-name">Your name</label><input id="f-name" name="name" required autocomplete="name"></div>
       <div class="field"><label for="f-email">Email (only needed if you’re sending by email)</label><input id="f-email" name="email" type="email" autocomplete="email"></div>
-      <div class="field"><label for="f-service">What are you interested in?</label>
+      <div class="field"><label for="f-service">Which service would you like?</label>
         <select id="f-service" name="service"><option value="">Not sure yet</option>
-          <option>Individual counselling</option><option>Couples counselling</option><option>Group therapy</option>
-          <option>Corporate wellness</option><option>Workshop or training</option><option>Specialised healing programme</option><option>Speaking or facilitation</option></select></div>
+          <option value="individual">Individual therapy &amp; counselling</option><option value="couples">Couples &amp; relationship counselling</option><option value="groups">Group therapy &amp; support</option>
+          <option value="corporate">Corporate mental health &amp; workplace wellness</option><option value="workshops">Workshops, training &amp; masterclasses</option><option value="programmes">Specialised healing programmes</option><option value="speaking">Speaking &amp; facilitation</option></select></div>
       <div class="field"><label for="f-when">When suits you best?</label><input id="f-when" name="when" placeholder="e.g. weekday evenings"></div>
       <div class="field"><label for="f-note">Anything you’d like us to know? (optional)</label><textarea id="f-note" name="note"></textarea></div>
       <div class="cta-row"><button class="btn" type="button" id="send-wa">Send by WhatsApp <span class="arr" aria-hidden="true">→</span></button><button class="btn ghost" type="button" id="send-mail">Send by email</button></div>
@@ -90,7 +90,7 @@
   <div class="faq"><details class="rv" open><summary>How do I know if I need therapy?</summary><div class="ans"><p>You don’t have to be falling apart to need therapy. If you feel overwhelmed, stuck, anxious, emotionally heavy, constantly overthinking, grieving, or caught in patterns you can’t seem to break, therapy can help.</p><p>You can also come because you want clarity, growth, or someone steady to think out loud with.</p></div></details><details class="rv" ><summary>What happens in the first session?</summary><div class="ans"><p>The first session is about understanding you. We build rapport, talk through confidentiality, explore your background and the challenges you’re facing now, and what you hope will change.</p></div></details><details class="rv" ><summary>Is what I say kept private?</summary><div class="ans"><p>Yes. Everything shared in session is confidential and handled professionally. The only exceptions are rare legal or safety situations, and those will always be explained to you clearly.</p></div></details><details class="rv" ><summary>How long does therapy last?</summary><div class="ans"><p>There’s no one-size-fits-all timeline. Some people come for short-term work (around 6 to 8 sessions). Others stay longer, depending on their goals. We review your progress together and decide what works best for you.</p></div></details><details class="rv" ><summary>Are sessions online or in person?</summary><div class="ans"><p>Sessions are held online by Zoom, Google Meet or WhatsApp video, whichever is easiest for you. In-person sessions are available on request. Online therapy is just as structured and intentional as meeting face to face, and we welcome clients outside Nigeria too.</p></div></details><details class="rv" ><summary>What approach do you use?</summary><div class="ans"><ul><li>Trauma-informed</li><li>CBT-based (Cognitive Behavioural Therapy)</li><li>Faith-integrated, when appropriate and requested</li></ul></div></details><details class="rv" ><summary>Do you only work with women?</summary><div class="ans"><p>No. The Beacon Centre serves individuals, couples, groups, leaders and organisations. Therapy is for anyone ready to grow, heal and gain clarity.</p></div></details><details class="rv" ><summary>What if I’ve tried therapy before and it didn’t work?</summary><div class="ans"><p>Sometimes the issue isn’t therapy itself. The relationship between you and your therapist matters a great deal. If you’re willing to try again, we can build a clearer, more intentional path forward.</p></div></details><details class="rv" ><summary>How do I book?</summary><div class="ans"><p>The quickest way is to <a href="https://wa.me/2348181057549?text=Hello%2C%20I%20just%20checked%20your%20website.%20My%20name%20is%20______%20and%20I%27d%20like%20to%20book%20a%20session." target="_blank" rel="noopener"><u>message us on WhatsApp</u></a>. You can also use the <a href="book.html"><u>booking page</u></a> or email <a href="mailto:beaconwellnesscentre@gmail.com"><u>beaconwellnesscentre@gmail.com</u></a>. Once you reach out, we’ll guide you through the next steps.</p></div></details></div>
 </div></section>
 </main>
-<div class="quick"><a class="btn" href="https://wa.me/2348181057549?text=Hello%2C%20I%20just%20checked%20your%20website.%20My%20name%20is%20______%20and%20I%27d%20like%20to%20book%20a%20session." data-wa="" target="_blank" rel="noopener">Book on WhatsApp <span class="arr" aria-hidden="true">→</span></a></div>
+<div class="quick"><a class="btn" href="services.html#book">Book a session <span class="arr" aria-hidden="true">→</span></a></div>
 <footer class="site-foot">
   <div class="wrap">
     <div class="foot-grid">
@@ -100,9 +100,9 @@
       </div>
       <div><h5>Explore</h5><ul>
         <li><a href="about.html">About</a></li><li><a href="services.html">Services</a></li>
-        <li><a href="resources.html">Resources</a></li><li><a href="book.html">Book a session</a></li></ul></div>
+        <li><a href="resources.html">Resources</a></li><li><a href="services.html#book">Book a session</a></li><li><a href="book.html">Contact</a></li></ul></div>
       <div><h5>Talk to us</h5><ul>
-        <li><a href="https://wa.me/2348181057549?text=Hello%2C%20I%20just%20checked%20your%20website.%20My%20name%20is%20______%20and%20I%27d%20like%20to%20book%20a%20session." data-wa="" target="_blank" rel="noopener">WhatsApp</a></li>
+        <li><a href="https://wa.me/2348181057549?text=Hello%2C%20I%20just%20checked%20your%20website.%20My%20name%20is%20______%20and%20I%27d%20like%20to%20book%20a%20session." target="_blank" rel="noopener">WhatsApp</a></li>
         <li><a href="tel:+2348181057549">0818 105 7549</a></li>
         <li><a href="mailto:beaconwellnesscentre@gmail.com">beaconwellnesscentre@gmail.com</a></li></ul></div>
       <div><h5>Hours</h5><ul>
