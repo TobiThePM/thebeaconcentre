@@ -52,10 +52,21 @@
       if(!ok()) return;
       window.open("https://wa.me/"+WA+"?text="+encodeURIComponent(msg()),"_blank","noopener");
     });
+    var help=d.getElementById("mail-help");
     d.getElementById("send-mail").addEventListener("click",function(){
       if(!ok()) return;
       var body=msg()+(f.elements.email.value?"\nMy email: "+f.elements.email.value.trim():"");
-      window.location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Session enquiry")+"&body="+encodeURIComponent(body);
+      var sub="Session enquiry";
+      var q="subject="+encodeURIComponent(sub)+"&body="+encodeURIComponent(body);
+      d.getElementById("m-gmail").href="https://mail.google.com/mail/?view=cm&fs=1&to="+EMAIL+"&su="+encodeURIComponent(sub)+"&body="+encodeURIComponent(body);
+      d.getElementById("m-app").href="mailto:"+EMAIL+"?"+q;
+      d.getElementById("m-copy").onclick=function(){
+        var note=d.getElementById("m-note"), text="To: "+EMAIL+"\nSubject: "+sub+"\n\n"+body;
+        function done(){ note.textContent="Copied. Paste it into a new email to "+EMAIL+"."; }
+        if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(text).then(done,function(){ note.textContent="Please copy the message manually and send it to "+EMAIL+"."; }); }
+        else { note.textContent="Please copy the message manually and send it to "+EMAIL+"."; }
+      };
+      help.hidden=false; help.scrollIntoView({behavior:"smooth",block:"nearest"});
     });
   }
 
