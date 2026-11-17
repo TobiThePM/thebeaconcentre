@@ -1,8 +1,8 @@
-/* Email sign-ups: paste the values from your Google Form here (steps are in the README).
-   Leave "action" empty and the pop-up and sign-up forms stay switched off. */
+/* Email sign-ups saved to the "Beacon Centre Leads" Google Form.
+   Leave "action" empty and the pop-up and sign-up forms switch off. */
 window.BEACON_LEADS = {
-  action: "",   // https://docs.google.com/forms/d/e/XXXXXXXX/formResponse
-  email:  "",   // entry.1234567890  (the Email question)
-  name:   "",   // entry.1234567890  (the First name question)
-  source: ""    // entry.1234567890  (the "Where did you sign up?" question)
+  action: "https://docs.google.com/forms/d/e/1FAIpQLSeWx-etYauS3ETsTU_SP_Jfvl51nr2O_yA3mq42JL3-An8Ucg/formResponse",
+  email:  "entry.1068410826",   // Email
+  name:   "entry.752079007",    // Name
+  source: "entry.1979182324"    // Where did you sign up?
 };

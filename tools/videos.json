@@ -1,4 +1,7 @@
 {
-  "channel": "",
-  "videos": []
+  "channel": "https://www.youtube.com/@Michellethebeacon",
+  "videos": [
+    {"id": "vBTLAvEzjuo", "title": "How To Process Your Emotions"},
+    {"id": "yJt1z0D8Bw8", "title": "How Your Past Trauma Can Affect Your Relationships With People"}
+  ]
 }
