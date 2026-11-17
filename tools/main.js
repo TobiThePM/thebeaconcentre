@@ -117,15 +117,88 @@
     d.addEventListener("keydown",function(e){ if(e.key==="Escape"&&!box.hidden) closePop(); });
   }
 
-  // resources sign-up (opens an email to the centre until a mailing list is connected)
+  // ---- email list: pop-up + Resources sign-up, saved to a Google Form ----
+  var L=window.BEACON_LEADS||{}, leadsOn=!!(L.action&&L.email);
+  function store(k,v){ try{ if(v===undefined) return localStorage.getItem(k); localStorage.setItem(k,v); }catch(e){ return null; } }
+  function sendLead(email,name,source){
+    var p=new URLSearchParams(); p.append(L.email,email);
+    if(L.name&&name) p.append(L.name,name);
+    if(L.source) p.append(L.source,source);
+    return fetch(L.action,{method:"POST",mode:"no-cors",body:p});
+  }
+  var page=(location.pathname.split("/").pop()||"index.html");
+
   var s=d.getElementById("signup");
   if(s){
     s.addEventListener("submit",function(e){
       e.preventDefault();
       var em=s.elements.email.value.trim();
       if(!s.elements.consent.checked){ s.elements.consent.focus(); return; }
-      window.location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Keep me posted")+"&body="+encodeURIComponent("Please add me to your updates list: "+em);
+      if(!leadsOn){ window.location.href="mailto:"+EMAIL+"?subject="+encodeURIComponent("Keep me posted")+"&body="+encodeURIComponent("Please add me to your updates list: "+em); return; }
+      sendLead(em,"","Resources page").then(function(){
+        store("bc_lead_done","1");
+        s.innerHTML='<p class="lead-ok"><b>You’re on the list. Thank you.</b><br>We’ll be in touch when something new is ready.</p>';
+      },function(){
+        var m=s.querySelector(".lead-err")||s.appendChild(d.createElement("p")); m.className="lead-err";
+        m.textContent="Something went wrong. Please try again, or message us on WhatsApp.";
+      });
     });
+  }
+
+  if(leadsOn && page!=="book.html" && !store("bc_lead_done")){
+    var seen=+store("bc_lead_seen")||0;
+    if(!seen || Date.now()-seen>14*864e5){
+      var pop=d.createElement("div"); pop.className="lead-pop"; pop.hidden=true;
+      pop.innerHTML='<div class="lead-card" role="dialog" aria-modal="true" aria-labelledby="lead-t">'+
+        '<button type="button" class="lead-x" aria-label="Close">&times;</button>'+
+        '<div class="lead-photo"><img src="assets/img/michelle-listening.jpg" alt=""></div>'+
+        '<div class="lead-body"><div class="lead-form">'+
+          '<span class="eyebrow">Stay in touch</span>'+
+          '<h3 id="lead-t">Updates from Michelle, in your inbox.</h3>'+
+          '<p>New videos, workshops and free resources as they’re ready. Short, honest, never noisy.</p>'+
+          '<form id="lead-f" novalidate>'+
+            '<input class="lead-hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">'+
+            '<label for="lead-n">First name</label><input id="lead-n" autocomplete="given-name">'+
+            '<label for="lead-e">Email</label><input id="lead-e" type="email" required autocomplete="email" placeholder="you@example.com">'+
+            '<p class="lead-err" id="lead-err" hidden></p>'+
+            '<button class="btn" type="submit">Keep me posted <span class="arr" aria-hidden="true">→</span></button>'+
+          '</form>'+
+          '<p class="lead-fine">We’ll only email you from The Beacon Centre, and you can unsubscribe any time.</p>'+
+          '<p class="lead-no"><a href="#" id="lead-no">No thanks</a></p>'+
+        '</div>'+
+        '<div class="lead-done" hidden><span class="eyebrow">Thank you</span><h3>You’re on the list.</h3><p>We’ll be in touch when something new is ready.</p><button type="button" class="btn ghost" id="lead-close">Close</button></div>'+
+        '</div></div>';
+      d.body.appendChild(pop);
+      var shown=false, lastFocus=null;
+      var close=function(){ pop.hidden=true; d.body.classList.remove("lead-open"); store("bc_lead_seen",String(Date.now())); if(lastFocus&&lastFocus.focus) lastFocus.focus(); };
+      var show=function(){
+        if(shown||store("bc_lead_done")) return;
+        if(d.body.classList.contains("wa-open")){ setTimeout(show,8000); return; }
+        shown=true; lastFocus=d.activeElement; pop.hidden=false; d.body.classList.add("lead-open");
+        setTimeout(function(){ var n=pop.querySelector("#lead-n"); if(n) n.focus(); },30);
+      };
+      setTimeout(show,30000);
+      var w=window; w.addEventListener("scroll",function onS(){
+        var h=root.scrollHeight-w.innerHeight;
+        if(h>0 && w.scrollY/h>0.45){ w.removeEventListener("scroll",onS); show(); }
+      },{passive:true});
+      var armedAt=Date.now();
+      d.addEventListener("mouseout",function(e){ if(!e.relatedTarget && e.clientY<=0 && Date.now()-armedAt>10000) show(); });
+      pop.querySelector(".lead-x").addEventListener("click",close);
+      pop.querySelector("#lead-no").addEventListener("click",function(e){ e.preventDefault(); close(); });
+      pop.querySelector("#lead-close").addEventListener("click",close);
+      pop.addEventListener("click",function(e){ if(e.target===pop) close(); });
+      d.addEventListener("keydown",function(e){ if(e.key==="Escape"&&!pop.hidden) close(); });
+      var lf=pop.querySelector("#lead-f"), err=pop.querySelector("#lead-err");
+      lf.addEventListener("submit",function(e){
+        e.preventDefault(); err.hidden=true;
+        var em=lf.querySelector("#lead-e"), nm=lf.querySelector("#lead-n");
+        if(!em.value.trim()||!em.checkValidity()){ err.textContent="Please enter a valid email address."; err.hidden=false; em.focus(); return; }
+        var done=function(){ store("bc_lead_done","1"); pop.querySelector(".lead-form").hidden=true; pop.querySelector(".lead-done").hidden=false; };
+        if(lf.elements.website.value){ done(); return; }
+        sendLead(em.value.trim(),nm.value.trim(),"Pop-up · "+page).then(done,function(){ err.textContent="Something went wrong. Please try again, or message us on WhatsApp."; err.hidden=false; });
+      });
+    }
   }
   var y=d.getElementById("yr"); if(y) y.textContent=new Date().getFullYear();
 })();

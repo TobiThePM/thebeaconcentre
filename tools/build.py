@@ -8,6 +8,7 @@ os.makedirs(os.path.join(OUT, "assets/css"), exist_ok=True)
 os.makedirs(os.path.join(OUT, "assets/js"), exist_ok=True)
 shutil.copy(os.path.join(SRC, "style.css"), os.path.join(OUT, "assets/css/style.css"))
 shutil.copy(os.path.join(SRC, "main.js"), os.path.join(OUT, "assets/js/main.js"))
+shutil.copy(os.path.join(SRC, "config.js"), os.path.join(OUT, "assets/js/config.js"))
 
 from urllib.parse import quote
 WA_NUM = "2348181057549"
@@ -90,6 +91,7 @@ def foot():
     </div>
   </div>
 </footer>
+<script src="assets/js/config.js" defer></script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>
@@ -461,6 +463,21 @@ sv += f"""</div></section>
 """ + foot()
 pages["services.html"] = sv
 
+import json as _json
+_vp = os.environ.get("BEACON_VIDEOS") or os.path.join(SRC, "videos.json")
+_vc = _json.load(open(_vp, encoding="utf-8")) if os.path.exists(_vp) else {}
+YT_CHANNEL = _vc.get("channel", "")
+YT_VIDEOS = [v for v in _vc.get("videos", []) if v.get("id")]
+def videos_section():
+    if not YT_VIDEOS:
+        return ""
+    cards = "".join(
+        f'<a class="vid rv" href="https://www.youtube.com/watch?v={html.escape(v["id"])}" target="_blank" rel="noopener">'
+        f'<span class="vid-thumb"><img src="https://i.ytimg.com/vi/{html.escape(v["id"])}/hqdefault.jpg" alt="" loading="lazy" onerror="this.remove()"><i class="vid-play" aria-hidden="true"></i></span>'
+        f'<span class="vid-title">{html.escape(v.get("title",""))}</span></a>' for v in YT_VIDEOS)
+    chan = f'<p class="rv" style="margin-top:2rem"><a class="btn ghost" href="{html.escape(YT_CHANNEL)}" target="_blank" rel="noopener">Visit the YouTube channel {ARROW}</a></p>' if YT_CHANNEL else ""
+    return f'<section class="sec" id="watch"><div class="wrap"><div class="sec-head"><span class="eyebrow rv">Watch</span><h2 class="rv">Hear Michelle in her own words.</h2></div><div class="vids">{cards}</div>{chan}</div></section>'
+
 # ---------------- RESOURCES ----------------
 rs = head("Resources | The Beacon Centre", "Gentle, practical reading on therapy and emotional wellbeing from The Beacon Centre.", "resources.html")
 rs += f"""
@@ -488,6 +505,8 @@ rs += f"""
     </form>
   </div>
 </div></section>
+
+{videos_section()}
 
 <section class="sec blush"><div class="wrap">
   <div class="sec-head"><span class="eyebrow rv">Common questions</span><h2 class="rv">What people often want to know.</h2></div>
